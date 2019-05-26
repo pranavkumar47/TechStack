@@ -1,5 +1,5 @@
 # Install Jenkins
-## check SELINUX is disabled or not 
+## Check SELINUX is disabled or not 
     Step 1 nano /etc/sysconfig/selinux
     Make sure the file has this configurations
     SELINUX=disabled
@@ -14,10 +14,7 @@
     firewall-cmd --zone=public --permanent --add-port=8080/tcp
     Step 2
     firewall-cmd --reload
-## check the ports are open or not 
-### To Enable all the incoming ports for a service
-
-
+## Check the ports are open or not 
 **If you have a firewall installed, you must add Jenkins as an exception. You must change YOURPORT in the script below to the port you want to use. Port 8080 is the most common.**
 
     firewall-cmd --permanent --new-service=jenkins
@@ -28,6 +25,7 @@
     firewall-cmd --zone=public --add-service=http --permanent
     firewall-cmd --reload
 
+### To Enable all the incoming ports for a service
     You can also open the required ports for a service by using the –add-service option. To permit access by HTTP clients for the public zone: 
     -- firewall-cmd --zone=public --add-service=http
     success
@@ -69,7 +67,7 @@
     The Jenkins key for that repo is located at 
     - rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
 # Install jenkins package 
-- sudo yum install -y jenkins  
+    - sudo yum install -y jenkins  
 
 
 # Linux (jenkins doc)
@@ -96,3 +94,15 @@
 
     If your /etc/init.d/jenkins file fails to start Jenkins, edit the /etc/default/jenkins to replace the line ----HTTP_PORT=8080---- with ----HTTP_PORT=8081---- Here, "8081" was chosen but you can put another port available.
 
+# Post installation setup
+Unlocking Jenkins
+When you first access a new Jenkins instance, you are asked to unlock it using an automatically-generated password.
+
+Browse to http://localhost(OR)IP:8080 (or whichever port you configured for Jenkins when installing it) and wait until the Unlock Jenkins page appears.
+
+From the Jenkins console log output, copy the automatically-generated alphanumeric password (between the 2 sets of asterisks).
+
+## Creating the first administrator user
+Finally, after customizing Jenkins with plugins, Jenkins asks you to create your first administrator user.
+
+When the Create First Admin User page appears, specify the details for your administrator user in the respective fields and click Save and Finish.
